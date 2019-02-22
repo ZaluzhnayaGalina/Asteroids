@@ -1,10 +1,12 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace Asteroids
 {
     public static class Game
     {
+        private static int _count = 60;
         private static BaseObject[] _objects;
         private static BufferedGraphicsContext _context;
         public static BufferedGraphics Buffer;
@@ -31,19 +33,20 @@ namespace Asteroids
 
         public static void Load()
         {
-            _objects = new BaseObject[30];
+            _objects = new BaseObject[_count];
+            var rand = new Random();
             for (int i = 0; i < _objects.Length; i++)
             {
-                _objects[i] = new BaseObject(new Point(600, i*20),new Point(15-i,15-i), new Size(20,20)  );
+                if (i % 5 == 0)
+                    _objects[i] = new Ellipse(new Point(rand.Next(Width),rand.Next(Height)), new Point(15 - i, 15 - i), new Size(10, 10));
+                else
+                _objects[i] = new Star(new Point(rand.Next(Width), rand.Next(Height)), new Point(5, 0), new Size(5, 5));
+                
             }
         }
 
         public static void Draw()
         {
-            Buffer.Graphics.Clear(Color.Black);
-            Buffer.Graphics.DrawRectangle(Pens.White, new Rectangle(100,100,200,200));
-            Buffer.Graphics.FillEllipse(Brushes.Wheat, new Rectangle(100,100,200,200));
-            Buffer.Render();
             Buffer.Graphics.Clear(Color.Black);
             foreach (var baseObject in _objects)
             {
