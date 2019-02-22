@@ -35,7 +35,7 @@ namespace Asteroids
         {
             _objects = new BaseObject[_count];
             var rand = new Random();
-            for (int i = 0; i < _objects.Length; i++)
+            for (int i = 0; i < _objects.Length-1; i++)
             {
                 if (i % 5 == 0)
                     _objects[i] = new Ellipse(new Point(rand.Next(Width),rand.Next(Height)), new Point(15 - i, 15 - i), new Size(10, 10));
@@ -43,6 +43,7 @@ namespace Asteroids
                 _objects[i] = new Star(new Point(rand.Next(Width), rand.Next(Height)), new Point(5, 0), new Size(5, 5));
                 
             }
+            _objects[_count - 1] = new Ufo(new Point(10, Height / 2), new Point(0, 0), new Size(0,0));
         }
 
         public static void Draw()
