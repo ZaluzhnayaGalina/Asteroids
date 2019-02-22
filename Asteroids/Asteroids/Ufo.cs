@@ -12,7 +12,7 @@ namespace Asteroids
         private Image _image;
         public Ufo(Point pos, Point dir, Size size) : base(pos, dir, size)
         {
-            _image = Image.FromFile("ufo.jpg");
+            _image = Image.FromFile("ufo.png");
         }
         public override void Draw()
         {
