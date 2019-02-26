@@ -12,7 +12,7 @@ namespace Asteroids
         private static Asteroid[] _asteroids;
         private static BufferedGraphicsContext _context;
         public static BufferedGraphics Buffer;
-        private static int _asteroidCount=50;
+        private static int _asteroidCount=5;
         public static int Width { get; set; }
         public static int Height { get; set; }
 
@@ -22,6 +22,8 @@ namespace Asteroids
             var g = form.CreateGraphics();
             Width = form.ClientSize.Width;
             Height = form.ClientSize.Height;
+            if (Height > 1000 || Height < 0 || Width > 1000 || Width < 0)
+                throw new ArgumentOutOfRangeException();
             Buffer = _context.Allocate(g, new Rectangle(0, 0, Width, Height));
             var timer = new Timer{Interval = 100};
             timer.Start();
@@ -52,7 +54,7 @@ namespace Asteroids
             for (var i = 0; i < _asteroids.Length; i++)
             {
                 int r = rand.Next(5, 50);
-                _asteroids[i] = new Asteroid(new Point(1000, rand.Next(0, Height)), new Point(-r / 5, r), new Size(r, r));
+                _asteroids[i] = new Asteroid(new Point(Width, rand.Next(0, Height)), new Point(-r / 5, r), new Size(r, r));
             }
 
         }
