@@ -25,7 +25,7 @@ namespace Asteroids
             timer.Tick += Timer_Tick;
         }
 
-        private static void Timer_Tick(object sender, System.EventArgs e)
+        private static void Timer_Tick(object sender, EventArgs e)
         {
             Draw();
             Update();
