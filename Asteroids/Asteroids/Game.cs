@@ -12,7 +12,7 @@ namespace Asteroids
         private static Asteroid[] _asteroids;
         private static BufferedGraphicsContext _context;
         public static BufferedGraphics Buffer;
-        private static int _asteroidCount=3;
+        private static int _asteroidCount=40;
         public static int Width { get; set; }
         public static int Height { get; set; }
 
@@ -52,7 +52,7 @@ namespace Asteroids
             for (var i = 0; i < _asteroids.Length; i++)
             {
                 int r = rand.Next(5, 50);
-                _asteroids[i] = new Asteroid(new Point(1000, rand.Next(0, Game.Height)), new Point(-r / 5, r), new Size(r, r));
+                _asteroids[i] = new Asteroid(new Point(1000, rand.Next(0, Height)), new Point(-r / 5, r), new Size(r, r));
             }
 
         }
@@ -81,6 +81,8 @@ namespace Asteroids
             foreach (var asteroid in _asteroids)
             {
                 asteroid.Update();
+                if (asteroid.Collision(_bullet))
+                    System.Media.SystemSounds.Hand.Play();
             }
             _bullet.Update();
         }
