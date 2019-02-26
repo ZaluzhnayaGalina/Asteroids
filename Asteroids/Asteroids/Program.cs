@@ -6,7 +6,7 @@ namespace Asteroids
     {
         static void Main(string[] args)
         {
-            var form = new ButtonForm();
+            var form = new Form();
             form.Width = 800;
             form.Height = 600;
             Game.Init(form);            
