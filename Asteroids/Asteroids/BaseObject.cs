@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 
 namespace Asteroids
 {
@@ -11,7 +12,13 @@ namespace Asteroids
         protected BaseObject(Point pos, Point dir, Size size)
         {
             Pos = pos;
+            if (pos.X<0||pos.X>Game.Width)
+                throw new BaseObjectException("Неверная позиция (X)");
+            if (pos.Y < 0 || pos.Y > Game.Height)
+                throw new BaseObjectException("Неверная позиция (Y)");
             Dir = dir;
+            if (Math.Abs(dir.X)>100|| Math.Abs(dir.Y) > 100)
+                throw  new BaseObjectException("Слишком большая скорость!");
             Size = size;
             _startPos = new Point(pos.X, pos.Y);
         }

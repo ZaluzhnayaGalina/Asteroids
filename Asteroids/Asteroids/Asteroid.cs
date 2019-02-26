@@ -13,5 +13,11 @@ namespace Asteroids
         {
            Game.Buffer.Graphics.FillEllipse(Brushes.White, Pos.X, Pos.Y, Size.Width, Size.Height);
         }
+
+        public override void Reborn()
+        {
+            base.Reborn();
+            Pos.X = Game.Width;
+        }
     }
 }
