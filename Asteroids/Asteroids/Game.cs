@@ -16,17 +16,17 @@ namespace Asteroids
         public static int Width { get; set; }
         public static int Height { get; set; }
 
-        public static void Init(Form form)
+        private static LogDelegate _logDelegate;
+        public static void Init(Form form, LogDelegate logDelegate)
         {
             _context = BufferedGraphicsManager.Current;
             var g = form.CreateGraphics();
             Width = form.ClientSize.Width;
             Height = form.ClientSize.Height;
-            if (Height > 1000 || Height < 0 || Width > 1000 || Width < 0)
-                throw new ArgumentOutOfRangeException();
             Buffer = _context.Allocate(g, new Rectangle(0, 0, Width, Height));
             var timer = new Timer{Interval = 100};
             timer.Start();
+            _logDelegate = logDelegate;
             timer.Tick += Timer_Tick;
         }
 
